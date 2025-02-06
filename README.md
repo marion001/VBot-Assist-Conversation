@@ -1,6 +1,6 @@
 ## Cài Đặt
 1. Cài đặt [bằng cách đăng ký làm kho lưu trữ tùy chỉnh của HACS thêm trực tiếp url]
-2. Cài Đặt bằng cách sao chép thư mục `vbot_assist` vào trong thư mục `custom_comComponents` của bạn
+2. Hoặc Cài Đặt [bằng cách sao chép thư mục `vbot_assist` vào trong thư mục `custom_comComponents` của bạn cấu trúc thư mục sẽ là:  `custom_comComponents/vbot_assist`]
 
 3. Khởi động lại Home Assistant
 4. Đi tới: Cài đặt > Thiết bị & Dịch vụ
