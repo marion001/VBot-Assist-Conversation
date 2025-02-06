@@ -17,3 +17,6 @@
 10. Sau khi hoàn tất các bước bạn có thể nhập dữ liệu để kiểm tra như: "mấy giờ rồi"
 
 ![Image](https://github.com/user-attachments/assets/c7a58d0e-dc57-41a1-afa1-f5f9d82b9014)
+
+
+![Image](https://github.com/user-attachments/assets/d449b5b5-e5bb-42ed-9a36-6749d8e9a58a)
