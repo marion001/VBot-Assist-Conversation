@@ -11,7 +11,7 @@
       
 3. Khởi động lại Home Assistant
 4. Đi tới: Cài đặt > Thiết bị & Dịch vụ
-5. Ở góc dưới cùng bên phải, chọn nút Thêm tích hợp
+5. Ở góc dưới cùng bên phải, chọn nút Thêm tích hợp -> tìm kiếm với tên: "VBot Assistant"
 6. Làm theo hướng dẫn trên màn hình để hoàn tất thiết lập (cần nhập URL API của VBot: Ví Dụ: http://192.168.14.113:5002)
 7. Nếu cấu hình thành công Loa VBot sẽ phát 1 thông báo lời chào 
 8. Vào Cài đặt > [Trợ lý giọng nói]
