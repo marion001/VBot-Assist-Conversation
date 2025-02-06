@@ -1,0 +1,20 @@
+{
+    "domain": "vbot_assist",
+    "name": "Vbot Assistant",
+    "version": "1.0.0",
+    "documentation": "https://github.com/marion001/",
+    "requirements": ["aiohttp"],
+    "dependencies": [
+        "conversation",
+        "energy",
+        "history",
+        "recorder",
+        "rest",
+        "scrape"
+    ],
+    "codeowners": ["@marion001"],
+	"vbot_offline": "https://github.com/marion001/VBot_Offline",
+    "issue_tracker": "https://github.com/marion001/",
+    "iot_class": "cloud_polling",
+    "config_flow": true
+}

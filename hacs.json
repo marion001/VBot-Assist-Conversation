@@ -1,0 +1,9 @@
+{
+  "name": "VBot Assist",
+  "version": "1.0",
+  "slug": "vbot_assist",
+  "documentation": "https://github.com/marion001/VBot-Assist-Conversation",
+  "dependencies": [],
+  "codeowners": ["@marion001"],
+  "requirements": ["aiohttp"]
+}
