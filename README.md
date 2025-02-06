@@ -15,3 +15,5 @@
 8. Vào Cài đặt > [Trợ lý giọng nói]
 9. Nhấp để chỉnh sửa Trợ lý (chọn nhân viên hội thoại là: "VBot Assistant") và chọn làm mặc định (Đặt làm ưu tiên)
 10. Sau khi hoàn tất các bước bạn có thể nhập dữ liệu để kiểm tra như: "mấy giờ rồi"
+
+![Image](https://github.com/user-attachments/assets/c7a58d0e-dc57-41a1-afa1-f5f9d82b9014)
