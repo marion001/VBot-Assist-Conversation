@@ -1,4 +1,4 @@
-## Tích Hợp VBot Assistant Vào Assist (Tác Nhân) trong Home Assistant
+## Tích Hợp Trợ Lý Ảo Loa Thông Minh VBot Assistant Vào Assist (Tác Nhân) trong Home Assistant
 
 ## Cài Đặt
 1. Cài đặt [bằng cách đăng ký làm kho lưu trữ tùy chỉnh của HACS thêm trực tiếp url]
