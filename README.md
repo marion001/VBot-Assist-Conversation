@@ -1,3 +1,5 @@
+## Tích Hợp VBot Assistant Vào Assist (Tác Nhân) trong Home Assistant
+
 ## Cài Đặt
 1. Cài đặt [bằng cách đăng ký làm kho lưu trữ tùy chỉnh của HACS thêm trực tiếp url]
      - đi tới HACS -> Kho lưu trữ tùy chỉnh ->Thêm URL: https://github.com/marion001/VBot-Assist-Conversation.git -> chọn Kiểu là: "Bộ Tích Hợp" -> nhấn "Thêm"
