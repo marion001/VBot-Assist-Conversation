@@ -1,7 +1,12 @@
 ## Cài Đặt
 1. Cài đặt [bằng cách đăng ký làm kho lưu trữ tùy chỉnh của HACS thêm trực tiếp url]
-2. Hoặc Cài Đặt [bằng cách sao chép thư mục `vbot_assist` vào trong thư mục `custom_comComponents` của bạn cấu trúc thư mục sẽ là:  `custom_comComponents/vbot_assist`]
-
+     - đi tới HACS -> Kho lưu trữ tùy chỉnh ->Thêm URL: https://github.com/marion001/VBot-Assist-Conversation.git -> chọn Kiểu là: "Bộ Tích Hợp" -> nhấn "Thêm"
+  
+       
+2. Hoặc Cài Đặt Thủ Công:
+    - bằng cách tải về và sao chép toàn bộ thư mục `vbot_assist` vào trong thư mục `custom_components` của bạn cấu trúc thư mục sẽ là:  `custom_components/vbot_assist`
+  
+      
 3. Khởi động lại Home Assistant
 4. Đi tới: Cài đặt > Thiết bị & Dịch vụ
 5. Ở góc dưới cùng bên phải, chọn nút Thêm tích hợp
