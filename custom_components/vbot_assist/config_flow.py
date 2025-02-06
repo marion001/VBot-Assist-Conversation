@@ -1,7 +1,7 @@
 from homeassistant.helpers import config_validation as cv
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import FlowResult
-from .const import DOMAIN, VBot_URL_API
+from .const import DOMAIN, VBot_URL_API, VBot_PROCESSING_MODE
 from typing import Optional
 import voluptuous as vol
 import logging
@@ -9,38 +9,45 @@ import aiohttp
 
 _LOGGER = logging.getLogger(__name__)
 
+# Schema chứa cả URL API và Mode
 STEP_USER_DATA_SCHEMA = vol.Schema({
     vol.Optional(VBot_URL_API, default="http://192.168.14.113:5002"): str,
+    vol.Required(VBot_PROCESSING_MODE, default="chatbot"): vol.In(
+        {"chatbot": "Luồng Chatbot", "processing": "Luồng Xử Lý Chính"}
+    ),
 })
 
 Msg_API_Error = "Vui lòng kiểm tra lại địa chỉ API, cổng Port hoặc VBot không hoạt động" 
 
-#Xử lý, Kiểm tra cấu hình khi nhập URL
-class VeniceAIConversationConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+# Xử lý, Kiểm tra cấu hình khi nhập URL
+class VBotAssistantConversationConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
-    #async def async_step_user(self, user_input: dict[str, str] | None = None) -> FlowResult:
+
     async def async_step_user(self, user_input: Optional[dict[str, str]] = None) -> FlowResult:
         errors = {}
-        """Xử lý bước đầu tiên của quá trình cấu hình.""" 
-        errors["base"] ="Nhập URL API VBot để kết nối"
+
         if user_input is None:
             return self.async_show_form(step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors)
-        errors = {}
+
         try:
             base_url = user_input[VBot_URL_API]
+            vbot_mode = user_input[VBot_PROCESSING_MODE]
+
             if not base_url:
                 errors["base"] = "Cần phải nhập URL API hợp lệ gồm cả cổng PORT"
                 return self.async_show_form(step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors)
+
             response = await self.fetch_conversation_response(base_url, "bạn tên là gì")
-            #Nếu phản hồi true, tạo entry
+
             if response:
+                _LOGGER.info(f"[VBot Assist] Chế độ được chọn: {vbot_mode}")
                 return self.async_create_entry(title="VBot Assistant", data=user_input)  
             else:
-                errors["base"] = "Không thể lấy dữ liệu trò chuyện"
+                errors["base"] = f"Không kiểm tra được dữ liệu {Msg_API_Error}"
         except ValueError as e:
             errors["base"] = str(e)
             _LOGGER.error("[VBot Assist] Lỗi xác thực API: %s", e)
-        #Nếu có lỗi, hiển thị lại form để người dùng nhập lại
+
         return self.async_show_form(step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors)
 
     async def fetch_conversation_response(self, base_url: str, user_input: str) -> str:
@@ -51,9 +58,7 @@ class VeniceAIConversationConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             "action": "processing",
             "value": user_input
         }
-        headers = {
-            "Content-Type": "application/json"
-        }
+        headers = {"Content-Type": "application/json"}
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, json=payload, headers=headers) as response:

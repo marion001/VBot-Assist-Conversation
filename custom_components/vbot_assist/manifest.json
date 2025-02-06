@@ -1,7 +1,7 @@
 {
     "domain": "vbot_assist",
     "name": "VBot Assistant",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "documentation": "https://github.com/marion001/VBot-Assist-Conversation",
     "requirements": ["aiohttp"],
     "dependencies": [

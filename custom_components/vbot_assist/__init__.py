@@ -5,6 +5,7 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
 from homeassistant.components import conversation
 from homeassistant.helpers import intent
+#from .config_flow import VBotAssistantConversationConfigFlow
 from .const import DOMAIN, VBot_URL_API, VBot_PROCESSING_MODE, VBot_LANGUAGES
 import logging
 import aiohttp
@@ -12,22 +13,25 @@ import aiohttp
 _LOGGER = logging.getLogger(__name__)
 CONFIG_SCHEMA = cv.config_entry_only_config_schema("vbot_assist")
 
-#Thiết lập cuộc trò chuyện VBot Assistant
-async def async_setup(hass: HomeAssistant, config: dict) -> bool:
-    return True
+#async def async_setup(hass: HomeAssistant, config: dict) -> bool:
+    #hass.config_entries.async_register(DOMAIN, VBotAssistantConversationConfigFlow)
+    #return True
 
 #Thiết lập hội thoại
 async def async_setup_entry(hass: HomeAssistant, entry: config_entries.ConfigEntry) -> bool:
     try:
         base_url = entry.data.get(VBot_URL_API)
-        if not base_url:
+        # Lấy giá trị của vbot_mode
+        vbot_mode = entry.data.get(VBot_PROCESSING_MODE, "chatbot")
+        if not base_url or not vbot_mode:
             raise ValueError("[VBot Assist] API không được cung cấp. Vui lòng nhập API")
         #Gắn base_url khi tạo agent
-        agent = VBotAssistantConversationAgent(hass, entry, base_url)
+        agent = VBotAssistantConversationAgent(hass, entry, base_url, vbot_mode)
         conversation.async_set_agent(hass, entry, agent)
         hass.data.setdefault("vbot_assist", {})[entry.entry_id] = {
             "base_url": base_url,
             "agent": agent,
+            "vbot_mode": vbot_mode,
         }
     except Exception as e:
         _LOGGER.error("[VBot Assist] Không thiết lập được mục nhập API URL: %s", e)
@@ -45,10 +49,11 @@ class VBotAssistantConversationAgent(conversation.AbstractConversationAgent):
     def supported_languages(self) -> list[str]:
         return VBot_LANGUAGES
 
-    def __init__(self, hass: HomeAssistant, entry: config_entries.ConfigEntry, base_url: str) -> None:
+    def __init__(self, hass: HomeAssistant, entry: config_entries.ConfigEntry, base_url: str, vbot_mode: str) -> None:
         self.hass = hass
         self.entry = entry
         self.base_url = base_url
+        self.vbot_mode = vbot_mode
 
     #Xử lý dữ liệu và phản hồi
     async def async_process(self, user_input: conversation.ConversationInput) -> conversation.ConversationResult:
@@ -83,7 +88,7 @@ class VBotAssistantConversationAgent(conversation.AbstractConversationAgent):
         payload = {
             "type": 3,
             "data": "main_processing",
-            "action": f"{VBot_PROCESSING_MODE}",
+            "action": f"{self.vbot_mode}",
             "value": user_input
         }
         headers = {
