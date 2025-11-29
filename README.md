@@ -1,3 +1,9 @@
+##
+
+## Nhánh Này Hiện Đã Dừng Phát Triển, Hãy Truy Cập Nhánh Mới Với Đầy Đủ Tích Hợp Tại Đây: https://github.com/marion001/VBot_Offline_Custom_Component
+
+##
+
 ## Tích Hợp Trợ Lý Ảo Loa Thông Minh VBot Assistant Vào Assist (Tác Nhân) trong Home Assistant
 
 Trang Chính VBot Assistant: https://github.com/marion001/VBot_Offline
